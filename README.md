@@ -12,10 +12,9 @@ A minimal boilerplate for building single page applications with Vite.
 
 ## Getting Started
 
-1. Clone this repository
-2. Install dependencies: `npm install`
-3. Start development server: `npm run dev`
-4. Build for production: `npm run build`
+1. Install dependencies: `npm install`
+2. Start development server: `npm run dev`
+3. Build for production: `npm run build`
 
 ## Project Structure
 
@@ -23,6 +22,7 @@ A minimal boilerplate for building single page applications with Vite.
 src/
 ├── main.js          # Application entry point
 ├── style.css        # Global styles
+├── counter.js       # Example counter component
 └── assets/          # Static assets
 ```
 
