@@ -108,12 +108,21 @@ document.querySelector('#app').innerHTML = `
         </div>
       </div>
     </main>
+    
+    <!-- Fixed Contact Drawer -->
+    <div class="contact-drawer" id="contactDrawer">
+      <div class="drawer-handle-contact"></div>
+      <div class="drawer-interior-contact">
+        <div class="contact-icon">📞</div>
+      </div>
+    </div>
   </div>
 `
 
 // Initialize the alien technology interface
 initializeAlienTech()
 startTeleportationDemo()
+initializeContactDrawer()
 
 function initializeAlienTech() {
   const orderButtons = document.querySelectorAll('.order-button')
@@ -182,4 +191,63 @@ function startTeleportationDemo() {
   }
   
   animateTeleportation()
+}
+
+function initializeContactDrawer() {
+  const contactDrawer = document.getElementById('contactDrawer')
+  let isOpen = false
+  
+  contactDrawer.addEventListener('click', () => {
+    if (isOpen) {
+      contactDrawer.classList.remove('open')
+      contactDrawer.innerHTML = `
+        <div class="drawer-handle-contact"></div>
+        <div class="drawer-interior-contact">
+          <div class="contact-icon">📞</div>
+        </div>
+      `
+    } else {
+      contactDrawer.classList.add('open')
+      contactDrawer.innerHTML = `
+        <div class="drawer-handle-contact"></div>
+        <div class="drawer-interior-contact expanded">
+          <div class="contact-header">
+            <div class="contact-icon">📞</div>
+            <span class="contact-title">QUANTUM SUPPORT</span>
+          </div>
+          <div class="contact-methods">
+            <button class="contact-method">🛸 Telepathic Link</button>
+            <button class="contact-method">📡 Subspace Channel</button>
+            <button class="contact-method">⚡ Emergency Portal</button>
+          </div>
+        </div>
+      `
+      
+      // Add click handlers for contact methods
+      const methods = contactDrawer.querySelectorAll('.contact-method')
+      methods.forEach(method => {
+        method.addEventListener('click', (e) => {
+          e.stopPropagation()
+          method.style.background = 'linear-gradient(45deg, rgba(0,255,0,0.3), rgba(0,255,255,0.3))'
+          method.textContent = 'CONNECTING...'
+          
+          setTimeout(() => {
+            method.textContent = 'CONNECTED ✨'
+            setTimeout(() => {
+              contactDrawer.classList.remove('open')
+              isOpen = false
+              contactDrawer.innerHTML = `
+                <div class="drawer-handle-contact"></div>
+                <div class="drawer-interior-contact">
+                  <div class="contact-icon">📞</div>
+                </div>
+              `
+            }, 2000)
+          }, 1500)
+        })
+      })
+    }
+    
+    isOpen = !isOpen
+  })
 }
