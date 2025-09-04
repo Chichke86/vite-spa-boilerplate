@@ -140,19 +140,19 @@ body::before {
 }
 
 .brand-logo {
-  font-size: 6rem;
+  font-size: 5rem;
   font-weight: 900;
-  background: linear-gradient(45deg, #00ffff, #ff00ff, #00ff00, #ffff00, #00ffff);
+  background: linear-gradient(45deg, #00ffff, #0080ff, #ff00ff, #8000ff, #00ffff);
   background-size: 400% 400%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-shadow: 
-    0 0 30px rgba(0,255,255,0.5),
-    0 0 60px rgba(255,0,255,0.3),
-    0 0 90px rgba(0,255,0,0.2);
-  margin-bottom: 20px;
-  letter-spacing: 1rem;
+    0 0 30px rgba(0,255,255,0.8),
+    0 0 60px rgba(0,128,255,0.4),
+    0 0 90px rgba(255,0,255,0.3);
+  margin: 30px 0 20px;
+  letter-spacing: 0.8rem;
   animation: alienPulse 3s ease-in-out infinite alternate, gradientShift 4s ease-in-out infinite;
   position: relative;
 }
@@ -349,17 +349,20 @@ body::before {
 }
 
 .teleportation-demo {
-  margin: 50px auto;
-  max-width: 800px;
+  margin: 30px auto;
+  max-width: 900px;
+  position: relative;
+  z-index: 10;
 }
 
 .drawer-visualization {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 60px;
+  gap: 80px;
   margin: 30px 0;
-  perspective: 1000px;
+  perspective: 1200px;
+  transform-style: preserve-3d;
 }
 
 .drawer {
@@ -408,114 +411,298 @@ body::before {
 }
 
 .product {
-  font-size: 2rem;
-  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  font-size: 2.5rem;
+  transition: all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   position: relative;
   z-index: 10;
+  filter: drop-shadow(0 0 10px rgba(0,255,255,0.6));
 }
 
 .product-destination {
-  font-size: 2rem;
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  font-size: 2.5rem;
+  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  filter: drop-shadow(0 0 10px rgba(0,255,255,0.6));
 }
 
 .teleport-gate {
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 160px;
+  height: 160px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: perspective(800px) rotateX(15deg) rotateY(-25deg);
+  transform-style: preserve-3d;
 }
 
-.portal-ring {
+/* Outer ring with geometric patterns */
+.portal-outer-ring {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  border: 4px solid transparent;
+  border-radius: 50%;
+  background: 
+    conic-gradient(from 0deg, 
+      transparent 0deg, 
+      rgba(0,255,255,0.8) 60deg, 
+      transparent 120deg,
+      rgba(255,0,255,0.6) 180deg,
+      transparent 240deg,
+      rgba(0,150,255,0.8) 300deg,
+      transparent 360deg
+    ),
+    radial-gradient(circle, transparent 70%, rgba(0,255,255,0.3) 72%, transparent 74%);
+  background-clip: padding-box;
+  animation: outerRingRotate 8s linear infinite;
+  box-shadow: 
+    0 0 40px rgba(0,255,255,0.6),
+    0 0 80px rgba(0,255,255,0.3),
+    inset 0 0 30px rgba(0,255,255,0.2);
+}
+
+@keyframes outerRingRotate {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.05); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+/* Middle ring with energy patterns */
+.portal-middle-ring {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border: 3px solid transparent;
+  border-radius: 50%;
+  background: 
+    conic-gradient(from 180deg,
+      rgba(0,255,255,0.4) 0deg,
+      transparent 90deg,
+      rgba(255,0,255,0.6) 180deg,
+      transparent 270deg,
+      rgba(0,255,255,0.4) 360deg
+    );
+  background-clip: padding-box;
+  animation: middleRingRotate 6s linear infinite reverse;
+  box-shadow: 
+    0 0 30px rgba(255,0,255,0.4),
+    inset 0 0 20px rgba(255,0,255,0.2);
+}
+
+@keyframes middleRingRotate {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(-180deg) scale(0.95); }
+  100% { transform: rotate(-360deg) scale(1); }
+}
+
+/* Inner ring with intricate details */
+.portal-inner-ring {
+  position: absolute;
   width: 80px;
   height: 80px;
-  border: 3px solid #00ffff;
+  border: 2px solid rgba(0,255,255,0.8);
   border-radius: 50%;
-  position: absolute;
-  animation: ringPulse 2s ease-in-out infinite;
-  box-shadow: 0 0 20px #00ffff, inset 0 0 20px rgba(0,255,255,0.2);
+  background: 
+    radial-gradient(circle, 
+      transparent 50%, 
+      rgba(0,255,255,0.3) 52%, 
+      transparent 54%,
+      rgba(255,0,255,0.2) 60%,
+      transparent 62%
+    );
+  animation: innerRingPulse 3s ease-in-out infinite;
+  box-shadow: 
+    0 0 20px rgba(0,255,255,0.8),
+    inset 0 0 15px rgba(0,255,255,0.3);
 }
 
-@keyframes ringPulse {
+@keyframes innerRingPulse {
   0%, 100% { 
-    transform: scale(1) rotate(0deg);
-    border-color: #00ffff;
+    transform: scale(1);
+    border-color: rgba(0,255,255,0.8);
+    box-shadow: 0 0 20px rgba(0,255,255,0.8), inset 0 0 15px rgba(0,255,255,0.3);
   }
   50% { 
-    transform: scale(1.1) rotate(180deg);
-    border-color: #ff00ff;
+    transform: scale(1.1);
+    border-color: rgba(255,0,255,0.8);
+    box-shadow: 0 0 30px rgba(255,0,255,0.8), inset 0 0 20px rgba(255,0,255,0.4);
   }
 }
 
-.energy-beam {
-  width: 4px;
-  height: 60px;
-  background: linear-gradient(0deg, #00ffff, #ff00ff, #00ffff);
+/* Central core with swirling energy */
+.portal-core {
   position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: 
+    radial-gradient(circle,
+      rgba(0,255,255,0.9) 0%,
+      rgba(0,150,255,0.7) 30%,
+      rgba(255,0,255,0.5) 60%,
+      transparent 80%
+    );
+  animation: coreSwirl 2s ease-in-out infinite alternate;
+  box-shadow: 
+    0 0 25px rgba(0,255,255,1),
+    0 0 50px rgba(0,255,255,0.6),
+    inset 0 0 15px rgba(255,255,255,0.3);
+}
+
+@keyframes coreSwirl {
+  0% { 
+    transform: scale(0.8) rotate(0deg);
+    box-shadow: 0 0 25px rgba(0,255,255,1), 0 0 50px rgba(0,255,255,0.6), inset 0 0 15px rgba(255,255,255,0.3);
+  }
+  100% { 
+    transform: scale(1.2) rotate(360deg);
+    box-shadow: 0 0 35px rgba(255,0,255,1), 0 0 70px rgba(255,0,255,0.6), inset 0 0 20px rgba(255,255,255,0.4);
+  }
+}
+
+/* Energy rays emanating outward */
+.energy-rays {
+  position: absolute;
+  width: 180px;
+  height: 180px;
   opacity: 0;
-  transition: opacity 0.3s ease;
-  animation: beamFlicker 0.1s ease-in-out infinite alternate;
-  box-shadow: 0 0 10px currentColor;
+  transition: opacity 0.5s ease;
+  background: 
+    linear-gradient(0deg, transparent 48%, rgba(0,255,255,0.6) 50%, transparent 52%),
+    linear-gradient(45deg, transparent 48%, rgba(255,0,255,0.4) 50%, transparent 52%),
+    linear-gradient(90deg, transparent 48%, rgba(0,255,255,0.6) 50%, transparent 52%),
+    linear-gradient(135deg, transparent 48%, rgba(255,0,255,0.4) 50%, transparent 52%),
+    linear-gradient(180deg, transparent 48%, rgba(0,255,255,0.6) 50%, transparent 52%),
+    linear-gradient(225deg, transparent 48%, rgba(255,0,255,0.4) 50%, transparent 52%),
+    linear-gradient(270deg, transparent 48%, rgba(0,255,255,0.6) 50%, transparent 52%),
+    linear-gradient(315deg, transparent 48%, rgba(255,0,255,0.4) 50%, transparent 52%);
+  animation: raysRotate 4s linear infinite;
 }
 
-@keyframes beamFlicker {
-  0% { opacity: 0.8; }
-  100% { opacity: 1; }
+@keyframes raysRotate {
+  0% { transform: rotate(0deg) scale(1); }
+  100% { transform: rotate(360deg) scale(1.1); }
 }
 
-.particles {
+/* Swirling energy effect */
+.swirl-energy {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 100px;
+  height: 100px;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.5s ease;
+  background: 
+    conic-gradient(from 0deg,
+      transparent 0deg,
+      rgba(0,255,255,0.8) 30deg,
+      transparent 60deg,
+      rgba(255,0,255,0.6) 120deg,
+      transparent 150deg,
+      rgba(0,255,255,0.8) 210deg,
+      transparent 240deg,
+      rgba(255,0,255,0.6) 300deg,
+      transparent 330deg,
+      transparent 360deg
+    );
+  border-radius: 50%;
+  animation: swirlRotate 1.5s linear infinite;
+  mask: radial-gradient(circle, transparent 20%, black 25%, black 75%, transparent 80%);
 }
 
-.particles::before,
-.particles::after {
-  content: '✨';
+@keyframes swirlRotate {
+  0% { transform: rotate(0deg) scale(0.8); }
+  100% { transform: rotate(360deg) scale(1.2); }
+}
+
+/* Floating particles around portal */
+.portal-particles {
   position: absolute;
-  font-size: 1rem;
-  animation: sparkle 1s ease-in-out infinite;
+  width: 200px;
+  height: 200px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 
-.particles::before {
+.portal-particles::before,
+.portal-particles::after {
+  content: '';
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: radial-gradient(circle, rgba(0,255,255,1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: particleFloat 3s ease-in-out infinite;
+  box-shadow: 0 0 8px rgba(0,255,255,0.8);
+}
+
+.portal-particles::before {
   top: 20%;
-  left: 30%;
+  left: 15%;
   animation-delay: 0s;
 }
 
-.particles::after {
-  bottom: 20%;
-  right: 30%;
-  animation-delay: 0.5s;
+.portal-particles::after {
+  bottom: 25%;
+  right: 20%;
+  animation-delay: 1.5s;
+  background: radial-gradient(circle, rgba(255,0,255,1) 0%, transparent 70%);
+  box-shadow: 0 0 8px rgba(255,0,255,0.8);
 }
 
-@keyframes sparkle {
+@keyframes particleFloat {
   0%, 100% { 
-    opacity: 0;
-    transform: scale(0) rotate(0deg);
+    opacity: 0.3;
+    transform: scale(0.5) translateY(0px) rotate(0deg);
   }
   50% { 
     opacity: 1;
-    transform: scale(1) rotate(180deg);
+    transform: scale(1.5) translateY(-20px) rotate(180deg);
   }
+}
+
+/* Geometric patterns overlay */
+.geometric-pattern {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: 
+    repeating-conic-gradient(from 0deg,
+      transparent 0deg,
+      transparent 10deg,
+      rgba(0,255,255,0.1) 11deg,
+      rgba(0,255,255,0.1) 12deg,
+      transparent 13deg,
+      transparent 23deg
+    );
+  animation: patternRotate 12s linear infinite reverse;
+  pointer-events: none;
+}
+
+@keyframes patternRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-360deg); }
 }
 
 .demo-text {
   text-align: center;
-  color: #5856d6;
-  font-size: 1.2rem;
-  font-weight: 500;
-  margin-top: 30px;
+  color: rgba(0,255,255,0.9);
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 30px 0 40px;
+  text-shadow: 0 0 15px rgba(0,255,255,0.6);
   animation: textGlow 3s ease-in-out infinite alternate;
 }
 
 @keyframes textGlow {
-  0% { text-shadow: 0 0 5px rgba(88,86,214,0.3); }
-  100% { text-shadow: 0 0 15px rgba(88,86,214,0.6); }
+  0% { 
+    text-shadow: 0 0 15px rgba(0,255,255,0.6);
+    color: rgba(0,255,255,0.9);
+  }
+  100% { 
+    text-shadow: 0 0 25px rgba(255,0,255,0.8);
+    color: rgba(255,0,255,0.9);
+  }
 }
 
 .pricing-section {
